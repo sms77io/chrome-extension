@@ -1,12 +1,14 @@
 {
   "background": {
-    "page": "background.html"
+    "scripts": [
+      "background.bundle.js"
+    ]
   },
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "icon48.png"
   },
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; script-src-elem 'self' 'unsafe-eval'",
+  "content_security_policy": "script-src 'self'; object-src 'self'; script-src-elem 'self'",
   "icons": {
     "16": "icon16.png",
     "19": "icon19.png",
@@ -19,7 +21,7 @@
   "options_ui": {
     "page": "options.html",
     "open_in_tab": false,
-    "chrome_style": false
+    "chrome_style": true
   },
   "permissions": [
     "declarativeContent",
