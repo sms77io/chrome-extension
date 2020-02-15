@@ -3,10 +3,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
-import {Sms} from '../../util/Sms';
-import {To} from '../To';
-import {From} from '../From';
+import {To} from '../../components/To';
+import {From} from '../../components/From';
 import {Storage} from '../../util/Storage';
+import {sendSms} from '../../util/sendSms';
 
 export const Send = ({onSubmit, onCancel}) => {
     const [text, setText] = useState('');
@@ -20,13 +20,11 @@ export const Send = ({onSubmit, onCancel}) => {
         });
     }, []);
 
-    const handleSubmit = async () => {
-        await Sms.send(text, to, from);
+    return <form onSubmit={async () => {
+        await sendSms({text, to, from});
 
         onSubmit();
-    };
-
-    return <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+    }}>
         <h2 style={{textAlign: 'center'}}>Send SMS</h2>
 
         <TextField
@@ -40,9 +38,9 @@ export const Send = ({onSubmit, onCancel}) => {
             value={text}
         />
 
-        <To onChange={e => setTo(e.target.value)} to={to}/>
+        <To onChange={to => setTo(to)} value={to}/>
 
-        <From onChange={e => setFrom(e.target.value)} from={from}/>
+        <From onChange={from => setFrom(from)} value={from}/>
 
         <ButtonGroup fullWidth color='primary'>
             <Button type='button' onClick={onCancel}>Cancel</Button>

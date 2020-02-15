@@ -2,21 +2,32 @@ import React, {useEffect, useState} from 'react';
 import {render} from 'react-dom';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import {makeStyles} from '@material-ui/core/styles';
 
 import {Storage} from '../../util/Storage';
 import {ApiKey} from './ApiKey';
-import {From} from '../From';
-import {To} from '../To';
+import {From} from '../../components/From';
+import {To} from '../../components/To';
 import {SignaturePosition} from './SignaturePosition';
 import {Signature} from './Signature';
+import {Type} from '../../components/Type';
 
 export const Options = () => {
+    const classes = makeStyles(t => ({
+        root: {
+            '& .MuiTextField-root, .MuiFormControl-root': {
+                marginBottom: t.spacing(0),
+            },
+        },
+    }))();
+
     const [state, setState] = useState({
         apiKey: '',
-        to: '',
         from: '',
         signature: '',
         signaturePosition: 'append',
+        to: '',
+        type: 'direct',
     });
 
     const onSubmit = async ev => {
@@ -28,24 +39,28 @@ export const Options = () => {
     const handleChange = ({target: {name, value}}) => setState({...state, [name]: value});
 
     useEffect(() => {
-        Storage.get(null).then(s => setState(s));
+        Storage.getBytesInUse(null).then(b => {
+            if (0 !== b) { // dont load store values before init
+                Storage.get(null).then(s => setState(s));
+            }
+        });
     }, []);
 
     return <Container>
-        <form onSubmit={onSubmit}>
+        <form className={classes.root} onSubmit={onSubmit}>
             <ApiKey onChange={handleChange} apiKey={state.apiKey}/>
 
-            <From onChange={handleChange} from={state.from}/>
+            <Type onChange={handleChange} type={state.type}/>
 
-            <To onChange={handleChange} to={state.to}/>
+            <From onChange={from => setState({...state, from})} value={state.from}/>
 
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-                <Signature onChange={handleChange} signature={state.signature}/>
+            <To onChange={to => setState({...state, to})} value={state.to}/>
 
-                <SignaturePosition onChange={handleChange} signaturePosition={state.signaturePosition}/>
-            </div>
+            <Signature onChange={handleChange} signature={state.signature}/>
 
-            <Button type='submit'>Submit</Button>
+            <SignaturePosition onChange={handleChange} signaturePosition={state.signaturePosition}/>
+
+            <Button fullWidth type='submit'>Submit</Button>
         </form>
     </Container>;
 };

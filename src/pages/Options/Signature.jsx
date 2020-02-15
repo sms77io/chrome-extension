@@ -3,8 +3,9 @@ import TextField from '@material-ui/core/TextField';
 
 export const Signature = ({onChange, signature}) => {
     return <TextField
-        helperText='A signature gets added to all sent messages'
-        label='Signature'
+        fullWidth
+        label='Signature added to all outgoing messages'
+        multiline
         name='signature'
         onChange={onChange}
         placeholder='Signature'

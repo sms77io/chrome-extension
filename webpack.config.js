@@ -35,15 +35,16 @@ module.exports = {
     devtool: isDev ? 'inline-source-map' : undefined,
     entry: (() => {
         const prod = {
+            background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js'),
+            contentScripts: path.join(__dirname, 'src', 'contentScripts.js'),
             options: path.join(__dirname, 'src', 'pages', 'Options', 'index.jsx'),
             popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.jsx'),
-            background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js'),
         };
 
         if (isDev) {
             for (const entryName in prod) {
                 prod[entryName] = [
-                    'webpack-dev-server/client?http://localhost:' + PORT,
+                    `webpack-dev-server/client?http://localhost:${PORT}`,
                     'webpack/hot/dev-server',
                 ].concat(prod[entryName]);
             }

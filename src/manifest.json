@@ -8,6 +8,16 @@
     "default_popup": "popup.html",
     "default_icon": "icon48.png"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentScripts.bundle.js"
+      ]
+    }
+  ],
   "content_security_policy": "script-src 'self'; object-src 'self'; script-src-elem 'self'",
   "icons": {
     "16": "icon16.png",
@@ -24,16 +34,18 @@
     "chrome_style": true
   },
   "permissions": [
+    "activeTab",
+    "contextMenus",
     "declarativeContent",
     "storage",
-    "contextMenus",
     "tabs",
-    "activeTab"
+    "notifications"
   ],
   "web_accessible_resources": [
     "icon16.png",
     "icon19.png",
     "icon48.png",
-    "icon128.png"
+    "icon128.png",
+    "logo.svg"
   ]
 }
