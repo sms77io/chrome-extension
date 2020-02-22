@@ -20,7 +20,9 @@ export const Send = ({onSubmit, onCancel}) => {
         });
     }, []);
 
-    return <form onSubmit={async () => {
+    return <form onSubmit={async e => {
+        e.preventDefault();
+
         await sendSms({text, to, from});
 
         onSubmit();

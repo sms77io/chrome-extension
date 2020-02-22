@@ -48,7 +48,7 @@ export const Options = () => {
 
     return <Container>
         <form className={classes.root} onSubmit={onSubmit}>
-            <ApiKey onChange={handleChange} apiKey={state.apiKey}/>
+            <ApiKey onChange={handleChange} value={state.apiKey}/>
 
             <Type onChange={handleChange} type={state.type}/>
 

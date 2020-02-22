@@ -36,7 +36,8 @@ export const Popup = () => {
         </a>
 
         {
-            'send' === stage ? <Send onSubmit={() => setStage('root')} onCancel={() => setStage('root')}/>
+            'send' === stage ?
+                <Send onSubmit={() => setStage('root')} onCancel={() => setStage('root')}/>
                 : <ButtonGroup fullWidth orientation={'vertical'}>
                     <Button onClick={() => chrome.runtime.openOptionsPage()} color={'secondary'}
                             startIcon={<Settings/>}>Options</Button>

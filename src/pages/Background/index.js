@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener(({action, notification}, sender, sendRespon
     }
 });
 
-chrome.contextMenus.onClicked.addListener( ({selectionText}) => {
+chrome.contextMenus.onClicked.addListener(({selectionText}) => {
     chrome.tabs.query({active: true}, tabs => {
         const activeTab = tabs.shift();
 
