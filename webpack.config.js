@@ -1,11 +1,11 @@
 process.env.BABEL_ENV = process.env.NODE_ENV;
 
-const webpack = require('webpack'),
-    path = require('path'),
-    {CleanWebpackPlugin} = require('clean-webpack-plugin'),
-    CopyWebpackPlugin = require('copy-webpack-plugin'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    WriteFilePlugin = require('write-file-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const fileExtensions = [
     'jpg',

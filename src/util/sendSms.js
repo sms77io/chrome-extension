@@ -6,13 +6,15 @@ import {getTo} from './getTo';
 import {addSignature} from './addSignature';
 import {getFrom} from './getFrom';
 import {getType} from './getType';
+import {Storage} from './Storage';
 
 export const sendSms = async ({text, to, from, type}) => {
     let res = null;
     const errors = [];
 
-    const opts = (() => {
+    const opts = (async () => {
         const opts = {
+            debug: Boolean(await Storage.get('debug')),
             json: 1,
             text,
             to,

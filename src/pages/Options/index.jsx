@@ -3,14 +3,26 @@ import {render} from 'react-dom';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import {makeStyles} from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import {Storage} from '../../util/Storage';
-import {ApiKey} from './ApiKey';
 import {From} from '../../components/From';
 import {To} from '../../components/To';
-import {SignaturePosition} from './SignaturePosition';
-import {Signature} from './Signature';
 import {Type} from '../../components/Type';
+import {Signature} from './Signature';
+import {SignaturePosition} from './SignaturePosition';
+import {ApiKey} from './ApiKey';
+import {Debug} from '../../components/Debug';
+
+const defaultState = {
+    apiKey: '',
+    debug: 0,
+    from: '',
+    signature: '',
+    signaturePosition: 'append',
+    to: '',
+    type: 'direct',
+};
 
 export const Options = () => {
     const classes = makeStyles(t => ({
@@ -21,14 +33,7 @@ export const Options = () => {
         },
     }))();
 
-    const [state, setState] = useState({
-        apiKey: '',
-        from: '',
-        signature: '',
-        signaturePosition: 'append',
-        to: '',
-        type: 'direct',
-    });
+    const [state, setState] = useState(defaultState);
 
     const onSubmit = async ev => {
         ev.preventDefault();
@@ -39,14 +44,20 @@ export const Options = () => {
     const handleChange = ({target: {name, value}}) => setState({...state, [name]: value});
 
     useEffect(() => {
-        Storage.getBytesInUse(null).then(b => {
-            if (0 !== b) { // dont load store values before init
-                Storage.get(null).then(s => setState(s));
+        Storage.get(null).then(s => {
+            const isStorageEmpty = 0 === Object.keys(s).length;
+
+            if (isStorageEmpty) {
+                Storage.set(defaultState);
+            } else {
+                setState(s);
             }
         });
     }, []);
 
     return <Container>
+        <CssBaseline/>
+
         <form className={classes.root} onSubmit={onSubmit}>
             <ApiKey onChange={handleChange} value={state.apiKey}/>
 
@@ -59,6 +70,8 @@ export const Options = () => {
             <Signature onChange={handleChange} signature={state.signature}/>
 
             <SignaturePosition onChange={handleChange} signaturePosition={state.signaturePosition}/>
+
+            <Debug onChange={() => setState({...state, debug: Boolean(e.target.checked)})} value={state.debug}/>
 
             <Button fullWidth type='submit'>Submit</Button>
         </form>
