@@ -5,10 +5,9 @@ import {getApiKey} from './getApiKey';
 import {getTo} from './getTo';
 import {addSignature} from './addSignature';
 import {getFrom} from './getFrom';
-import {getType} from './getType';
 import {Storage} from './Storage';
 
-export const sendSms = async ({text, to, from, type}) => {
+export const sendSms = async ({text, to, from}) => {
     let res = null;
     const errors = [];
 
@@ -24,10 +23,6 @@ export const sendSms = async ({text, to, from, type}) => {
             opts.from = from;
         }
 
-        if (['direct', 'economy'].includes(type)) {
-            opts.type = type;
-        }
-
         return opts;
     })();
 
@@ -36,8 +31,6 @@ export const sendSms = async ({text, to, from, type}) => {
     to = await getTo(to);
 
     from = await getFrom(from);
-
-    type = await getType(type);
 
     text = await addSignature(text);
 

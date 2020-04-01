@@ -8,7 +8,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {Storage} from '../../util/Storage';
 import {From} from '../../components/From';
 import {To} from '../../components/To';
-import {Type} from '../../components/Type';
 import {Signature} from './Signature';
 import {SignaturePosition} from './SignaturePosition';
 import {ApiKey} from './ApiKey';
@@ -21,7 +20,6 @@ const defaultState = {
     signature: '',
     signaturePosition: 'append',
     to: '',
-    type: 'direct',
 };
 
 export const Options = () => {
@@ -60,8 +58,6 @@ export const Options = () => {
 
         <form className={classes.root} onSubmit={onSubmit}>
             <ApiKey onChange={handleChange} value={state.apiKey}/>
-
-            <Type onChange={handleChange} type={state.type}/>
 
             <From onChange={from => setState({...state, from})} value={state.from}/>
 

@@ -57,7 +57,6 @@ describe('Sms77Chrome', () => {
 
         await expect(optionsPage).toFillForm('form', {
             apiKey: process.env.SMS77_API_KEY || '!123DUMMY_API_KEY456!',
-            type: 'direct',
             from: 'sms77io',
             to: process.env.SMS77_TO || '+4901234567890',
             signature: ' Greetings from sms77.io',
