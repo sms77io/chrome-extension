@@ -10,12 +10,11 @@ export const Radios = ({entries, onChange, value, label, name}) =>
         <FormLabel style={{display: 'none'}} component='legend'
                    aria-label={label}>{label}</FormLabel>
 
-
         <RadioGroup aria-label={label}
                     name={name}
                     onChange={onChange}
                     value={value}>
-            {entries.map(({value, label}) => <FormControlLabel labelPlacement="end" key={value}
+            {entries.map(({value, label}) => <FormControlLabel labelPlacement='end' key={value}
                                                                value={value} control={<Radio/>}
                                                                label={label}/>)}
         </RadioGroup>

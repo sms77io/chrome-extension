@@ -5,10 +5,10 @@ export const getApiKey = async () => {
 
     apiKey = 'string' === typeof apiKey && apiKey.length
         ? apiKey
-        : prompt('Please enter your sms77.io API key.');
+        : prompt(chrome.i18n.getMessage('prompt_api_key'));
 
     if (!apiKey) {
-        throw new Error('Your API key must be set in order to send SMS.');
+        throw new Error(chrome.i18n.getMessage('api_key_required'));
     }
 
     return apiKey;

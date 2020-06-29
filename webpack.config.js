@@ -21,16 +21,30 @@ const fileExtensions = [
 ];
 const PORT = process.env.PORT || 3000;
 const isDev = 'development' === process.env.NODE_ENV;
+const outDir = path.join(__dirname, 'build');
+
+const pageTemplate = title => {
+    const name = title.toLowerCase();
+
+    return new HtmlWebpackPlugin({
+        cache: false,
+        chunks: [name],
+        filename: `${name}.html`,
+        template: path.join(__dirname, 'src', 'pages', 'template.ejs'),
+        title,
+    });
+};
 
 module.exports = {
     devServer: isDev ? {
-        contentBase: path.join(__dirname, './build'),
+        contentBase: outDir,
         disableHostCheck: true,
         headers: {
             'Access-Control-Allow-Origin': '*',
         },
         hot: false,
         port: PORT,
+        writeToDisk: true,
     } : {},
     devtool: isDev ? 'inline-source-map' : undefined,
     entry: (() => {
@@ -82,25 +96,21 @@ module.exports = {
         ],
     },
     output: {
-        path: path.join(__dirname, 'build'),
+        path: outDir,
         filename: '[name].bundle.js',
     },
     plugins: [
-        isDev ? new webpack.HotModuleReplacementPlugin() : () => {
-        },
         new webpack.ProgressPlugin(),
-        new CleanWebpackPlugin({ // clean the build folder
-            verbose: true
-        }),
+        new CleanWebpackPlugin({verbose: true}), // clean the build folder
         new webpack.EnvironmentPlugin(['NODE_ENV']), // expose and write the allowed env vars on the compiled bundle
-        new CopyWebpackPlugin(
-            [
+        new CopyWebpackPlugin({
+            patterns: [
                 {
-                    from: 'src/manifest.json',
-                    to: path.join(__dirname, 'build'),
                     force: true,
+                    from: 'src/manifest.json',
+                    to: outDir,
                     transform(content) {
-                        return Buffer.from( // generates the manifest file using the package.json information
+                        return Buffer.from( // generate manifest.json using package.json information
                             JSON.stringify({
                                 description: process.env.npm_package_description,
                                 version: process.env.npm_package_version,
@@ -109,23 +119,19 @@ module.exports = {
                         );
                     },
                 },
+                {
+                    force: true,
+                    from: 'src/_locales',
+                    to: `${outDir}/_locales`,
+                    toType: 'dir',
+                },
             ],
-            {
-                logLevel: 'info',
-                copyUnmodified: true,
-            }
-        ),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'src', 'pages', 'template.html'),
-            filename: 'options.html',
-            chunks: ['options'],
         }),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'src', 'pages', 'template.html'),
-            filename: 'popup.html',
-            chunks: ['popup'],
-        }),
+        pageTemplate('Options'),
+        pageTemplate('Popup'),
         new WriteFilePlugin(),
+        isDev ? new webpack.HotModuleReplacementPlugin() : () => {
+        },
     ],
     resolve: {
         alias: {

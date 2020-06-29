@@ -67,9 +67,10 @@ export const Options = () => {
 
             <SignaturePosition onChange={handleChange} signaturePosition={state.signaturePosition}/>
 
-            <Debug onChange={() => setState({...state, debug: Boolean(e.target.checked)})} value={state.debug}/>
+            <Debug onChange={() => setState({...state, debug: Boolean(e.target.checked)})}
+                   value={state.debug}/>
 
-            <Button fullWidth type='submit'>Submit</Button>
+            <Button fullWidth type='submit'>{chrome.i18n.getMessage('submit')}</Button>
         </form>
     </Container>;
 };

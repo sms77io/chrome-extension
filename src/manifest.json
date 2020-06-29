@@ -1,51 +1,52 @@
 {
-  "background": {
-    "scripts": [
-      "background.bundle.js"
+    "background": {
+        "scripts": [
+            "background.bundle.js"
+        ]
+    },
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": "icon48.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "contentScripts.bundle.js"
+            ]
+        }
+    ],
+    "content_security_policy": "script-src 'self'; object-src 'self'; script-src-elem 'self'",
+    "default_locale": "en",
+    "icons": {
+        "16": "icon16.png",
+        "19": "icon19.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "manifest_version": 2,
+    "name": "__MSG_sms77chrome__",
+    "options_page": "options.html",
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true,
+        "chrome_style": true
+    },
+    "permissions": [
+        "activeTab",
+        "contextMenus",
+        "declarativeContent",
+        "storage",
+        "tabs",
+        "notifications"
+    ],
+    "web_accessible_resources": [
+        "icon16.png",
+        "icon19.png",
+        "icon48.png",
+        "icon128.png",
+        "logo.svg"
     ]
-  },
-  "browser_action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon48.png"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "contentScripts.bundle.js"
-      ]
-    }
-  ],
-  "content_security_policy": "script-src 'self'; object-src 'self'; script-src-elem 'self'",
-  "icons": {
-    "16": "icon16.png",
-    "19": "icon19.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
-  },
-  "manifest_version": 2,
-  "name": "Sms77 Chrome Extension",
-  "options_page": "options.html",
-  "options_ui": {
-    "page": "options.html",
-    "open_in_tab": true,
-    "chrome_style": true
-  },
-  "permissions": [
-    "activeTab",
-    "contextMenus",
-    "declarativeContent",
-    "storage",
-    "tabs",
-    "notifications"
-  ],
-  "web_accessible_resources": [
-    "icon16.png",
-    "icon19.png",
-    "icon48.png",
-    "icon128.png",
-    "logo.svg"
-  ]
 }

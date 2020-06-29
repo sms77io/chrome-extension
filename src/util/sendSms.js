@@ -11,54 +11,39 @@ export const sendSms = async ({text, to, from}) => {
     let res = null;
     const errors = [];
 
-    const opts = (async () => {
-        const opts = {
-            debug: Boolean(await Storage.get('debug')),
-            json: 1,
-            text,
-            to,
-        };
-
-        if ('string' === typeof from && from.length) {
-            opts.from = from;
-        }
-
-        return opts;
-    })();
-
-    const apiKey = await getApiKey();
-
-    to = await getTo(to);
-
-    from = await getFrom(from);
-
-    text = await addSignature(text);
+    const smsParams = {
+        debug: Boolean(await Storage.get('debug')) ? 1 : 0,
+        from: 'string' === typeof from && from.length ? from : await getFrom(from),
+        json: 1,
+        text: await addSignature(text),
+        to: await getTo(to),
+    };
 
     if (errors.length) {
-        errors.unshift('Error(s) while sending:');
+        errors.unshift(chrome.i18n.getMessage('error_sending'));
 
         notify(errors.join('\n'));
     } else {
         const lines = [];
 
-        res = await (new Sms77Client(apiKey, 'chrome')).sms(opts);
+        res = await (new Sms77Client(await getApiKey(), 'chrome')).sms(smsParams);
 
         const {balance, messages, sms_type, success, total_price} = res;
 
         if (100 === Number.parseInt(success)) {
-            lines.push(
-                `${messages.length} ${sms_type} SMS sent valued at ${total_price} €. Balance: ${balance}`
-            );
+            lines.push(chrome.i18n.getMessage('msg_sent',
+                [messages.length, `${sms_type} SMS`, total_price, balance]));
 
             for (const sms of messages) {
                 let line = '';
 
                 if (sms.success) {
-                    line += `#${sms.id} ${sms.parts}x valued at`;
-                    line += ` ${sms.price} sent to ${sms.recipient} from ${sms.sender}: ${sms.text}`;
+                    line += chrome.i18n.getMessage('msg_n_value', [sms.id, sms.parts]);
+                    line += chrome.i18n.getMessage('msg_n_to_from',
+                        [sms.price, sms.recipient, sms.sender, sms.text]);
                 } else {
-                    line += `#${sms.id} failed sending to ${sms.recipient}`;
-                    line += ` from ${sms.sender} with encoding ${sms.sender}: ${sms.encoding}`;
+                    line += chrome.i18n.getMessage('msg_n_failed', [sms.id, sms.recipient]);
+                    line += chrome.i18n.getMessage('msg_n_from_with', [sms.sender, sms.encoding]);
                 }
 
                 sms.messages && sms.messages.forEach(msg => line += ` / ${msg}`);
@@ -66,11 +51,11 @@ export const sendSms = async ({text, to, from}) => {
                 lines.push(line);
             }
         } else {
-            lines.push(`An error occured while sending SMS to "${to}": ${JSON.stringify(res)}`);
+            lines.push(chrome.i18n.getMessage('sms_error', [smsParams.to]) + JSON.stringify(res));
         }
 
         notify(lines.join('\n'));
     }
 
-    window.dispatchEvent(new CustomEvent('sms77send', {detail: {opts, res, errors}}));
+    window.dispatchEvent(new CustomEvent('sms77send', {detail: {smsParams, res, errors}}));
 };

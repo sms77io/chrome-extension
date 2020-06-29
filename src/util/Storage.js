@@ -7,7 +7,7 @@ export class Storage {
             storage[method](data, result =>
                 lastError
                     ? reject(Error(lastError))
-                    : resolve(result ? result[data] ? result[data] : result : data)
+                    : resolve(result ? data in result ? result[data] : result : data)
             )
         );
 

@@ -8,10 +8,10 @@ export const From = ({value, onChange}) => {
 
     return <TextField
         fullWidth
-        label='Sender Identifier'
+        label={chrome.i18n.getMessage('from')}
         name='from'
         onChange={e => onChange(e.target.value)}
-        placeholder='Sender Identifier'
+        placeholder={chrome.i18n.getMessage('from')}
         value={from}
     />;
 };

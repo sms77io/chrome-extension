@@ -8,10 +8,10 @@ export const ApiKey = ({value, onChange}) => {
 
     return <TextField
         fullWidth
-        label='API key from sms77.io required for sending'
+        label={chrome.i18n.getMessage('api_key_required')}
         name='apiKey'
         onChange={onChange}
-        placeholder='API key'
+        placeholder={chrome.i18n.getMessage('api_key')}
         required
         value={apiKey}
     />;

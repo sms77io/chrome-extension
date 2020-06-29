@@ -7,10 +7,10 @@ export const getTo = async to => {
 
     to = to && to.length
         ? to
-        : prompt('Please enter a recipient phone number or address book entry.');
+        : prompt(chrome.i18n.getMessage('prompt_to'));
 
     if (!to || !to.length) {
-        throw new Error('To: A valid phone number or address book entry expected.');
+        throw new Error(chrome.i18n.getMessage('to_invalid'));
     }
 
     return to;

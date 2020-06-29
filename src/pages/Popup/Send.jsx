@@ -27,14 +27,14 @@ export const Send = ({onSubmit, onCancel}) => {
 
         onSubmit();
     }}>
-        <h2 style={{textAlign: 'center'}}>Send SMS</h2>
+        <h2 style={{textAlign: 'center'}}>{chrome.i18n.getMessage('send_sms')}</h2>
 
         <TextField
             fullWidth
-            label='Message content'
+            label={chrome.i18n.getMessage('msg')}
             multiline
             onChange={ev => setText(ev.target.value)}
-            placeholder='Enter message content here.'
+            placeholder={chrome.i18n.getMessage('msg_placeholder')}
             required
             rows='3'
             value={text}
@@ -45,9 +45,9 @@ export const Send = ({onSubmit, onCancel}) => {
         <From onChange={from => setFrom(from)} value={from}/>
 
         <ButtonGroup fullWidth color='primary'>
-            <Button type='button' onClick={onCancel}>Cancel</Button>
+            <Button type='button' onClick={onCancel}>{chrome.i18n.getMessage('cancel')}</Button>
 
-            <Button type='submit'>Send</Button>
+            <Button type='submit'>{chrome.i18n.getMessage('send_sms')}</Button>
         </ButtonGroup>
     </form>;
 };

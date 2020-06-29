@@ -17,8 +17,8 @@ export const Popup = () => {
 
     const classes = makeStyles({
         container: {
-            paddingTop: '15px',
             paddingBottom: '15px',
+            paddingTop: '15px',
         },
         logo: {
             display: 'block',
@@ -32,7 +32,7 @@ export const Popup = () => {
         <CssBaseline/>
 
         <a href='https://www.sms77.io' target='_blank' rel='noopener'>
-            <img src={logo} alt='sms77io Logo' className={classes.logo}/>
+            <img src={logo} alt={chrome.i18n.getMessage('sms77_logo')} className={classes.logo}/>
         </a>
 
         {
@@ -40,9 +40,10 @@ export const Popup = () => {
                 <Send onSubmit={() => setStage('root')} onCancel={() => setStage('root')}/>
                 : <ButtonGroup fullWidth orientation={'vertical'}>
                     <Button onClick={() => chrome.runtime.openOptionsPage()} color={'secondary'}
-                            startIcon={<Settings/>}>Options</Button>
+                            startIcon={<Settings/>}>{chrome.i18n.getMessage('options')}</Button>
 
-                    <Button onClick={() => setStage('send')} startIcon={<Textsms/>}>Send SMS</Button>
+                    <Button onClick={() => setStage('send')}
+                            startIcon={<Textsms/>}>{chrome.i18n.getMessage('send_sms')}</Button>
                 </ButtonGroup>
         }
     </Container>;

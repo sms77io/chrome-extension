@@ -1,6 +1,5 @@
 import {version} from '../../package.json';
 import {getBackgroundPage} from './util/getBackgroundPage';
-import {customEventListener} from './util/customEventListener';
 import {getMetaData} from './util/getMetaData';
 
 describe('Sms77Chrome', () => {

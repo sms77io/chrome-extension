@@ -1,0 +1,167 @@
+{
+    "submit": {
+        "message": "Absenden"
+    },
+    "debug_enable": {
+        "message": "Debug aktivieren"
+    },
+    "debug_disable": {
+        "message": "Debug deaktivieren"
+    },
+    "from": {
+        "message": "Senderkennung"
+    },
+    "to": {
+        "message": "Adressat(en)"
+    },
+    "to_invalid": {
+        "message": "Adressat(en): Muss eine gültige Rufnummer oder gültiger Adressbucheintrag sein."
+    },
+    "notification_title": {
+        "message": "sms77io hat was zu erzählen..."
+    },
+    "send_via_us": {
+        "message": "SMS versenden via Sms77.io"
+    },
+    "api_key": {
+        "message": "API-Schlüssel"
+    },
+    "api_key_required": {
+        "message": "API-Schlüssel von sms77.io erforderlich zum versenden"
+    },
+    "signature": {
+        "message": "Signatur"
+    },
+    "signature_label": {
+        "message": "Signatur zu allen ausgehenden Nachrichten hinzufügen"
+    },
+    "signature_position": {
+        "message": "Signatur-Positionierung"
+    },
+    "signature_position_append": {
+        "message": "Signatur anhängen"
+    },
+    "signature_position_prepend": {
+        "message": "Signatur voranstellen"
+    },
+    "sms77_logo": {
+        "message": "sms77io Logo"
+    },
+    "options": {
+        "message": "Optionen"
+    },
+    "send_sms": {
+        "message": "SMS senden"
+    },
+    "prompt_api_key": {
+        "message": "Bitte geben Sie Ihren sms77.io API-Schlüssel ein."
+    },
+    "prompt_from": {
+        "message": "Bitte geben Sie eine Senderkennung ein."
+    },
+    "prompt_to": {
+        "message": "Bitte geben Sie eine Rufnummer oder einen Adressbucheintrag ein."
+    },
+    "error_sending": {
+        "message": "Fehler beim Versenden:"
+    },
+    "msg_sent": {
+        "message": "`$msg_count$ $type$ versendet mit einem Wert von $total_price$ €. Balance: $balance$`",
+        "placeholders": {
+            "msg_count": {
+                "content": "$1",
+                "example": 14
+            },
+            "type": {
+                "content": "$2",
+                "example": "Direkt-SMS"
+            },
+            "total_price": {
+                "content": "$3",
+                "example": 1.23
+            },
+            "balance": {
+                "content": "$4",
+                "example": 15.25
+            }
+        }
+    },
+    "msg_n_value": {
+        "message": "#$msg_id$ $msg_parts$x zum Wert von",
+        "placeholders": {
+            "msg_id": {
+                "content": "$1",
+                "example": 6739186031
+            },
+            "msg_parts": {
+                "content": "$2",
+                "example": 4
+            }
+        }
+    },
+    "msg_n_to_from": {
+        "message": " $msg_price$ gesendet an $msg_recipient$ von $msg_sender$: $msg_text$",
+        "placeholders": {
+            "msg_price": {
+                "content": "$1",
+                "example": 0.63
+            },
+            "msg_recipient": {
+                "content": "$2",
+                "example": "Peter Pan"
+            },
+            "msg_sender": {
+                "content": "$3",
+                "example": "Sms77.io"
+            },
+            "msg_text": {
+                "content": "$4",
+                "example": "HI2U!"
+            }
+        }
+    },
+    "msg_n_failed": {
+        "message": "#$msg_id$ konnte nicht zugestellt werden an $msg_to$",
+        "placeholders": {
+            "msg_id": {
+                "content": "$1",
+                "example": 62347632513
+            },
+            "msg_to": {
+                "content": "$2",
+                "example": "Michael Jackson im Himmel"
+            }
+        }
+    },
+    "msg_n_from_with": {
+        "message": " von $msg_sender$ mit Kodierung $msg_encoding$",
+        "placeholders": {
+            "msg_sender": {
+                "content": "$1",
+                "example": "Sms77.io"
+            },
+            "msg_encoding": {
+                "content": "$2",
+                "example": "GSM 03.38"
+            }
+        }
+    },
+    "sms_error": {
+        "message": "Ein Fehler ist aufgetreten beim SMS-Versand an \"$to$\": ",
+        "placeholders": {
+            "to": {
+                "content": "$1",
+                "example": "+4901234567890"
+            }
+        }
+    },
+    "msg": {
+        "message": "Nachrichteninhalt"
+    },
+    "msg_placeholder": {
+        "message": "Nachrichteninhalt hier eintippen."
+    },
+    "cancel": {
+        "message": "Abbrechen"
+    }
+}

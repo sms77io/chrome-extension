@@ -1,0 +1,170 @@
+{
+    "sms77chrome": {
+        "message": "Sms77.io"
+    },
+    "submit": {
+        "message": "Submit"
+    },
+    "debug_enable": {
+        "message": "Enable Debug"
+    },
+    "debug_disable": {
+        "message": "Disable Debug"
+    },
+    "from": {
+        "message": "Sender Identifier"
+    },
+    "to": {
+        "message": "Recipient(s)"
+    },
+    "to_invalid": {
+        "message": "Recipient(s): A valid phone number or address book entry expected."
+    },
+    "notification_title": {
+        "message": "sms77io has something to say..."
+    },
+    "send_via_us": {
+        "message": "Send SMS via Sms77.io"
+    },
+    "api_key": {
+        "message": "API Key"
+    },
+    "api_key_required": {
+        "message": "API key from sms77.io required for sending"
+    },
+    "signature": {
+        "message": "Signature"
+    },
+    "signature_label": {
+        "message": "Signature added to all outgoing messages"
+    },
+    "signature_position": {
+        "message": "Signature Positioning"
+    },
+    "signature_position_append": {
+        "message": "Append Signature"
+    },
+    "signature_position_prepend": {
+        "message": "Prepend Signature"
+    },
+    "sms77_logo": {
+        "message": "sms77io Logo"
+    },
+    "options": {
+        "message": "Options"
+    },
+    "send_sms": {
+        "message": "Send SMS"
+    },
+    "prompt_api_key": {
+        "message": "Please enter your sms77.io API key."
+    },
+    "prompt_from": {
+        "message": "Please enter a sender identifier."
+    },
+    "prompt_to": {
+        "message": "Please enter a recipient phone number or address book entry."
+    },
+    "error_sending": {
+        "message": "Error(s) while sending:"
+    },
+    "msg_sent": {
+        "message": "`$msg_count$ $type$ sent valued at $total_price$ €. Balance: $balance$`",
+        "placeholders": {
+            "msg_count": {
+                "content": "$1",
+                "example": 14
+            },
+            "type": {
+                "content": "$2",
+                "example": "direct"
+            },
+            "total_price": {
+                "content": "$3",
+                "example": 1.23
+            },
+            "balance": {
+                "content": "$4",
+                "example": 15.25
+            }
+        }
+    },
+    "msg_n_value": {
+        "message": "#$msg_id$ $msg_parts$x valued at",
+        "placeholders": {
+            "msg_id": {
+                "content": "$1",
+                "example": 6739186031
+            },
+            "msg_parts": {
+                "content": "$2",
+                "example": 4
+            }
+        }
+    },
+    "msg_n_to_from": {
+        "message": " $msg_price$ sent to $msg_recipient$ from $msg_sender$: $msg_text$",
+        "placeholders": {
+            "msg_price": {
+                "content": "$1",
+                "example": 0.63
+            },
+            "msg_recipient": {
+                "content": "$2",
+                "example": "Peter Pan"
+            },
+            "msg_sender": {
+                "content": "$3",
+                "example": "Sms77.io"
+            },
+            "msg_text": {
+                "content": "$4",
+                "example": "HI2U!"
+            }
+        }
+    },
+    "msg_n_failed": {
+        "message": "#$msg_id$ failed sending to $msg_to$",
+        "placeholders": {
+            "msg_id": {
+                "content": "$1",
+                "example": 62347632513
+            },
+            "msg_to": {
+                "content": "$2",
+                "example": "Michael Jackson in Heaven"
+            }
+        }
+    },
+    "msg_n_from_with": {
+        "message": " from $msg_sender$ with encoding $msg_encoding$",
+        "placeholders": {
+            "msg_sender": {
+                "content": "$1",
+                "example": "Sms77.io"
+            },
+            "msg_encoding": {
+                "content": "$2",
+                "example": "GSM 03.38"
+            }
+        }
+    },
+    "sms_error": {
+        "message": "An error occured while sending SMS to \"$to$\": ",
+        "placeholders": {
+            "to": {
+                "content": "$1",
+                "example": "+4901234567890"
+            }
+        }
+    },
+    "msg": {
+        "message": "Message content"
+    },
+    "msg_placeholder": {
+        "message": "Enter message content here."
+    },
+    "cancel": {
+        "message": "Cancel"
+    }
+}
