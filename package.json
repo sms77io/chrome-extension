@@ -1,6 +1,6 @@
 {
     "name": "sms77-chrome",
-    "version": "2.2.0",
+    "version": "2.3.0",
     "description": "Chrome extension for the sms77io SMS gateway",
     "license": "MIT",
     "repository": {

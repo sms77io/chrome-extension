@@ -35,9 +35,7 @@
         "chrome_style": true
     },
     "permissions": [
-        "activeTab",
         "contextMenus",
-        "declarativeContent",
         "storage",
         "tabs",
         "notifications"
