@@ -5,10 +5,10 @@ export const getApiKey = async () => {
 
     apiKey = 'string' === typeof apiKey && apiKey.length
         ? apiKey
-        : prompt(chrome.i18n.getMessage('prompt_api_key'));
+        : prompt(chrome.i18n.getMessage('prompt_apiKey'));
 
     if (!apiKey) {
-        throw new Error(chrome.i18n.getMessage('api_key_required'));
+        throw new Error(chrome.i18n.getMessage('apiKeyRequired'));
     }
 
     return apiKey;

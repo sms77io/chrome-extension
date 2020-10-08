@@ -1,26 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {render} from 'react-dom';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
 import {Storage} from '../../util/Storage';
-import {From} from '../../components/From';
-import {To} from '../../components/To';
-import {Signature} from './Signature';
-import {SignaturePosition} from './SignaturePosition';
-import {ApiKey} from './ApiKey';
-import {Debug} from '../../components/Debug';
-
-const defaultState = {
-    apiKey: '',
-    debug: 0,
-    from: '',
-    signature: '',
-    signaturePosition: 'append',
-    to: '',
-};
+import SmsOptions from '../../components/SmsOptions';
+import setDefaults, {defaultStorage} from '../../util/setDefaults';
+import GeneralOptions from '../../components/GeneralOptions';
 
 export const Options = () => {
     const classes = makeStyles(t => ({
@@ -31,46 +18,33 @@ export const Options = () => {
         },
     }))();
 
-    const [state, setState] = useState(defaultState);
+    const [options, setOptions] = useState(defaultStorage);
 
-    const onSubmit = async ev => {
-        ev.preventDefault();
+    const handleChange = o => setOptions({...options, ...o});
 
-        await Storage.set(state);
+    const handleRestoreDefaults = async () => {
+        await Storage.clear();
+
+        await setDefaults();
     };
-
-    const handleChange = ({target: {name, value}}) => setState({...state, [name]: value});
-
-    useEffect(() => {
-        Storage.get(null).then(s => {
-            const isStorageEmpty = 0 === Object.keys(s).length;
-
-            if (isStorageEmpty) {
-                Storage.set(defaultState);
-            } else {
-                setState(s);
-            }
-        });
-    }, []);
 
     return <Container>
         <CssBaseline/>
 
-        <form className={classes.root} onSubmit={onSubmit}>
-            <ApiKey onChange={handleChange} value={state.apiKey}/>
+        <form className={classes.root}>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <h1>Sms77.io {chrome.i18n.getMessage('options')}</h1>
 
-            <From onChange={from => setState({...state, from})} value={state.from}/>
+                <Button onClick={handleRestoreDefaults}>
+                    {chrome.i18n.getMessage('restore_defaults')}</Button>
+            </div>
 
-            <To onChange={to => setState({...state, to})} value={state.to}/>
+            <h2>General</h2>
+            <GeneralOptions handleChange={handleChange}/>
 
-            <Signature onChange={handleChange} signature={state.signature}/>
-
-            <SignaturePosition onChange={handleChange} signaturePosition={state.signaturePosition}/>
-
-            <Debug onChange={() => setState({...state, debug: Boolean(e.target.checked)})}
-                   value={state.debug}/>
-
-            <Button fullWidth type='submit'>{chrome.i18n.getMessage('submit')}</Button>
+            <h2>SMS</h2>
+            <SmsOptions handleChange={handleChange} setOptions={setOptions}
+                        persist/>
         </form>
     </Container>;
 };

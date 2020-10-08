@@ -1,7 +1,10 @@
 import {Storage} from './Storage';
 
-export const addSignature = async (text) => {
-    const {signature, signaturePosition} = await Storage.get(['signature', 'signaturePosition']);
+export const addSignature = async (text, general = null) => {
+    if (!general) {
+        general = (await Storage.get(null)).general;
+    }
+    const {signature, signaturePosition} = general;
 
     if ('string' === typeof signature) {
         text = 'append' === signaturePosition

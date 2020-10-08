@@ -1,17 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import TextField from '@material-ui/core/TextField';
+import React from 'react';
+import {TextOption} from './TextOption';
 
-export const From = ({value, onChange}) => {
-    const [from, setFrom] = useState('');
-
-    useEffect(() => setFrom(value), [value]);
-
-    return <TextField
-        fullWidth
-        label={chrome.i18n.getMessage('from')}
-        name='from'
-        onChange={e => onChange(e.target.value)}
-        placeholder={chrome.i18n.getMessage('from')}
-        value={from}
-    />;
-};
+export const From = ({onChange, persist}) => <TextOption
+    onChange={onChange}
+    persist={persist}
+    storagePath='sms.from'
+/>;
